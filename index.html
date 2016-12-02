@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everything you didn't know you didn't know — A Crash Course in Front End Web Development, by Amelia Bellamy-Royds</title>
+<!-- main styles -->
+<link rel="stylesheet" href="slides.css" media="all"/>
+<!-- CodeMirror syntax highlighting styles --
+<link rel="stylesheet" href="hopscotch.css" media="screen" />
+<!-- -->
+    <style>
+        .control {
+            display: block;
+            position: fixed;
+            background-color: rgba(100%, 100%, 75%, 0.8); 
+            font-size: 80%;
+            padding: 0.25em 0.5em;
+            bottom: 0;
+            right: 0;
+            z-index: 1000;
+          
+            opacity: 0.5;
+        }
+      .control:hover {opacity: 1;}
+        .control input[type="checkbox"] {
+            height: 1em;
+            width: 1em;
+            border-radius: 25%;
+            box-sizing: border-box;
+            font-size: inherit;
+        }
+    </style>
+    <style id="interactive-styles" disabled="disabled" media="only none">
+        .slide:focus li, 
+        .slide :focus ~ li, .slide :focus ~ ul, .slide :focus ~ ol, 
+        .slide .contains-focus ~ li, .slide .contains-focus ~ ul, .slide .contains-focus ~ ol {
+            opacity: 0.05;
+        }
+        .slide li ul, .slide li ol {
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: opacity 0.5s;
+        }
+        li:focus ul, .contains-focus > ul,
+        li:focus ol, .contains-focus > ol {
+            height: auto;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="cm-s-hopscotch">
+<main>
+  <header class="slide">
+    <h1><span style="display: block; font-style: italic">
+      Everything you didn't know you didn't know</span>
+    <span style="font-size: 75%; text-shadow: none">A Crash Course in Front End<br/> Web Development</span></h1>
+    <p>Amelia Bellamy-Royds 
+      (<a href="https://twitter.com/AmeliasBrain">@AmeliasBrain</a>)
+    </p>
+    <p>
+      Edmonton, 2 December 2016</p>
+    <p>These slides: <a href="https://ameliabr.github.io/">ameliabr.github.io</a></p>
+  </header>
+  <section id="intro">
+    <div class="slide" data-section-slug="Front-End Dev">
+      <h3 id="what-">What?</h3>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<p><strong><em>Front-end</em></strong>: In web development, the code &amp; content that is interpreted on the end-user's computer.</p>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<p>AKA <em>client-side</em></p>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<p>Compare with <em>back-end</em>, AKA <em>server-side</em></p>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<h3 id="why-">Why?</h3>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<blockquote>
+<p>Reports that say that something hasn't happened are always interesting to me, because as we know, <strong>there are known knowns</strong>; there are things we know we know. We also know <strong>there are known unknowns</strong>; that is to say we know there are some things we do not know. <strong>But there are also unknown unknowns</strong> – the ones we don't know we don't know. And if one looks throughout the history of our country and other free countries, it is <strong>the latter category that tend to be the difficult ones</strong>.</p>
+<p><a href="https://en.wikipedia.org/wiki/There_are_known_knowns"><cite>Donald Rumsfeld, 12 February 2002</cite></a></p>
+</blockquote>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<h3 id="how-">How?</h3>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<ul>
+<li>Learn the language</li>
+<li>Learn the goals</li>
+<li>Learn the obstacles</li>
+</ul>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<p>Eight themes.</p>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<p>The Front-End Dev platform is:</p>
+<ul>
+<li>Declarative</li>
+<li>Distributed</li>
+<li>Defensive</li>
+<li>Evolutionary</li>
+</ul>
+    </div>
+    <div class="slide" data-section-slug="Front-End Dev">
+<p>Front-End Dev <em>should</em> be:</p>
+<ul>
+<li>Responsive</li>
+<li>Accessible</li>
+<li>Performant</li>
+<li>Robust</li>
+</ul>
+    </div>
+  </section>
+  <section id="declarative">
+    <div class="slide">
+      <h2>Declarative</h2>
+    </div>
+    <div class="slide" data-section-slug="Declarative">
+<p>Not all computer code is programming code!</p>
+    </div>
+    <div class="slide" data-section-slug="Declarative">
+<ul>
+<li><p><strong><em>Declarative</em></strong>: Encode the content / state / properties.</p>
+<p>Interpretter required to Make It So.</p>
+</li>
+<li><p><strong><em>Imperative</em></strong>: Encode the instructions step-by-step.  AKA programming.</p>
+</li>
+</ul>
+    </div>
+    <div class="slide" data-section-slug="Declarative">
+<p>HTML &amp; CSS are <em>declarative</em> code.</p>
+<p>They provide <em>native</em> functionality.</p>
+    </div>
+  </section>
+  <section id="distributed">
+    <div class="slide">
+      <h2>Distributed</h2>
+    </div>
+    <div class="slide" data-section-slug="Distributed">
+<p>Write once, run everywhere</p>
+    </div>
+    <div class="slide" data-section-slug="Distributed">
+<ul>
+<li>Hardware</li>
+<li>Operating Systems</li>
+<li>User preferences</li>
+<li>Network quality</li>
+<li>Software interpreters</li>
+</ul>
+    </div>
+    <div class="slide" data-section-slug="Distributed">
+<p>Web browsers are <em>competing</em> software. But your code needs to work in all of them.</p>
+    </div>
+    <div class="slide" data-section-slug="Distributed">
+<p><strong><em>Web standards</em></strong> make this easier, but not easy!</p>
+<p>Web standards are practical, political, consensus-based: no enforcement.</p>
+    </div>
+  </section>
+  <section id="defensive">
+    <div class="slide">
+      <h2>Defensive</h2>
+    </div>
+    <div class="slide" data-section-slug="Defensive">
+<p>Web browsers are <strong><em>user agents</em></strong>.</p>
+    </div>
+    <div class="slide" data-section-slug="Defensive">
+<p>They work for the user, not web site developers.</p>
+<ul>
+<li><p>Defend against hostile web site code.</p>
+</li>
+<li><p>Sandbox communication between web domains &amp; to the file system.</p>
+</li>
+<li><p>Allow user to override behavior &amp; turn off features.</p>
+</li>
+</ul>
+    </div>
+  </section>
+  <section id="evolutionary">
+    <div class="slide">
+      <h2>Evolutionary</h2>
+    </div>
+    <div class="slide" data-section-slug="Evolutionary">
+<p><em>not</em> <strong>R</strong>evolutionary!</p>
+    </div>
+    <div class="slide" data-section-slug="Evolutionary">
+<p>Both web sites &amp; web browsers must be backwards compatible.</p>
+<ul>
+<li><p>Progressive Enhancement</p>
+</li>
+<li><p>Graceful Degradation</p>
+</li>
+</ul>
+    </div>
+    <div class="slide" data-section-slug="Evolutionary">
+<ul>
+<li><p>Progressive Enhancement</p>
+</li>
+<li><p>Graceful Degradation</p>
+</li>
+</ul>
+    </div>
+    <div class="slide" data-section-slug="Evolutionary">
+<p>JavaScript <strong><em>libraries</em></strong> can help ease the transition.</p>
+<p><strong><em>Polyfills</em></strong> can patch over incomplete support.</p>
+    </div>
+    <div class="slide" data-section-slug="Evolutionary">
+<p>But there is a cost to shipping extra code!</p>
+    </div>
+  </section>
+  <section id="responsive">
+    <div class="slide">
+      <h2>Responsive</h2>
+    </div>
+    <div class="slide" data-section-slug="Responsive">
+<p>You're not designing for one device.</p>
+    </div>
+    <div class="slide" data-section-slug="Responsive">
+<ul>
+<li><p><em>Don't</em> try to create separate designs for each type of device!</p>
+<p>(There are way too many devices.)</p>
+</li>
+<li><p><em>Do</em> create adaptive, flexible designs, using content breakpoints.</p>
+</li>
+</ul>
+    </div>
+  </section>
+  <section id="accessible">
+    <div class="slide">
+      <h2>Accessible</h2>
+    </div>
+    <div class="slide" data-section-slug="Accessible">
+<p>The <a href="https://www.w3.org/TR/WCAG20/" title="https://www.w3.org/TR/WCAG20/">WCAG</a> goals should guide <em>all</em> software. Make sure it is:</p>
+<ul>
+<li><strong>P</strong>erceivable</li>
+<li><strong>O</strong>perable</li>
+<li><strong>U</strong>nderstandable</li>
+<li><strong>R</strong>obust</li>
+</ul>
+<p>…for <em>all</em> users.</p>
+    </div>
+    <div class="slide" data-section-slug="Accessible">
+<p>With <em>declarative</em> code, used as designed, the browser can handle most of this.  You only need to provide the content (image alt text, video captions).</p>
+    </div>
+    <div class="slide" data-section-slug="Accessible">
+<p>With <em>imperative</em> code (or hacks), you must recreate native functionality.</p>
+    </div>
+  </section>
+  <section id="performant">
+    <div class="slide">
+      <h2>Performant</h2>
+    </div>
+    <div class="slide" data-section-slug="Performant">
+<p>Respond to user input quickly.</p>
+<p>Animate visuals smoothly.</p>
+    </div>
+    <div class="slide" data-section-slug="Performant">
+<p>…on all devices and networks!</p>
+    </div>
+    <div class="slide" data-section-slug="Performant">
+<ul>
+<li><p>Don't ship code you don't have to.</p>
+</li>
+<li><p>Don't ship assets that won't be used.</p>
+</li>
+<li><p>Don't block the main thread.</p>
+</li>
+</ul>
+    </div>
+  </section>
+  <section id="robust">
+    <div class="slide">
+      <h2>Robust</h2>
+    </div>
+    <div class="slide" data-section-slug="Robust">
+<p>The <em>opposite</em> of fragile.</p>
+    </div>
+    <div class="slide" data-section-slug="Robust">
+<p><em>Robust</em> code handles unexpected problems:</p>
+<ul>
+<li>Network interuptions</li>
+<li>Older browsers / Unsupported features</li>
+<li>Incorrect user input</li>
+<li>Alternative user hardware / software options</li>
+</ul>
+    </div>
+  </section>
+  <!--
+  <section id="XXX">
+    <div class="slide">
+      <h2></h2>
+    </div>
+    <div class="slide" data-section-slug="XXX">
+      <p></p>
+      <figure></figure>
+    </div>
+  </section>
+-->
+<footer class="slide">
+<h2 id="_about-me_">About Me</h2>
+<p>Amelia Bellamy-Royds</p>
+<ul style="margin-bottom: auto;">
+<li>Author &amp; Web Standards Editor</li>
+<li>W3C Invited Expert, SVG and ARIA working groups</li>
+<li><a href="http://www.oreilly.com/pub/au/6190">Books on SVG from O'Reilly Media</a></li>
+<li><a href="https://twitter.com/AmeliasBrain">@AmeliasBrain</a></li>
+<li><a href="mailto:amelia.bellamy.royds@gmail.com">amelia.bellamy.royds@gmail.com</a></li>
+<li>These slides: <a href="https://ameliabr.github.io/">ameliabr.github.io/</a></li>
+</ul>
+</footer>
+</main>
+    <script>
+(function(){
+    var initialized = false;  
+    var interactiveStyles = document.getElementById("interactive-styles");
+    var slideSelector = ".slide", 
+        pointsSelector = ".slide > ul > li, .slide > ol > li, .slide > pre";
+    
+    var toggleLabel = document.createElement("label");
+    toggleLabel.setAttribute("class", "control");
+    document.body.id ="body";
+    toggleLabel.setAttribute("aria-controls", "body");
+    toggleLabel.textContent = "Tab to reveal";
+    
+    var toggle = document.createElement("input");
+    toggle.setAttribute("type", "checkbox");
+    toggle.addEventListener("change", toggleTabControl);
+    toggleLabel.insertBefore(toggle, null);
+    
+    document.body.insertBefore(toggleLabel, document.body.firstChild);
+    
+    function addTabIndex(selector) {
+        var points = document.querySelectorAll(selector);
+        for (var i=0, n=points.length; i<n; i++) {
+            points[i].setAttribute("tabIndex", 0);
+        }
+        return points;
+    }
+    function removeTabIndex(selector) {        
+        var points = document.querySelectorAll(selector);
+        for (var i=0, n=points.length; i<n; i++) {
+            points[i].removeAttribute("tabIndex");
+        }
+        return points;
+    }
+    
+    
+    //add tabIndex to slides
+    //scroll slide into place whenever heading gets focus
+    var slides = addTabIndex(slideSelector);
+    for (var i=0, n=slides.length; i<n; i++){
+        slides[i].addEventListener("focus", scrollSlide);
+    }
+    
+    function scrollSlide(e){
+        scrollTo(window.scrollX, e.target.offsetTop - 10);
+    }
+    
+    function toggleTabControl(e){
+        
+        if (!e.target.checked){
+            interactiveStyles.setAttribute("disabled", "disabled");
+            interactiveStyles.setAttribute("media", "only none"); 
+                //because "disabled" doesn't work!
+            document.body.insertBefore(interactiveStyles, null); //force refresh
+            
+            //remove tabIndex from points
+            removeTabIndex(pointsSelector);
+            return;
+        }
+        
+        //add tabIndex to bullet points
+        addTabIndex(pointsSelector);
+        
+        if (!initialized) {
+
+            //ensure that focusing links doesn't mess up focus styles
+            var links = document.getElementsByTagName("a");
+            for (var i=0, n=links.length; i<n; i++) {
+                links[i].addEventListener("focus", focusIn);
+                links[i].addEventListener("blur", focusOut);
+            }
+            initialized = true;
+        }
+        
+        interactiveStyles.removeAttribute("disabled");
+        interactiveStyles.setAttribute("media", "screen");
+        document.body.insertBefore(interactiveStyles, null); //force refresh
+    }
+    function focusIn(e){
+        var p = e.target.parentElement;
+        while ((p.tagName.toLowerCase() != "section") && 
+               (p != document.documentElement)) {
+            p.classList.add("contains-focus");
+            p = p.parentElement;
+        }
+    }
+    function focusOut(e){
+        var p = e.target.parentElement;
+        while ((p.tagName.toLowerCase() != "section") && 
+               (p != document.documentElement)) {
+            p.classList.remove("contains-focus");
+            p = p.parentElement;
+        }
+    }
+})();
+    </script>
+</body>
+</html>
